@@ -5,14 +5,21 @@ import Image from "next/image";
 
 export default function Home() {
   return (
+    //     display: flex;
+    // flex-direction: column;
+    // justify-content: space-between;
+    // align-items: center;
+    // padding: 6rem;
+    // min-height: 100vh;
     <Box
       sx={{
-        width: "100vw",
-        minHeight: "3120px",
+        width: "100vw", //1440
+        minHeight: "100vh", //3120
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         bgcolor: "grey.400",
+        padding: "6rem",
         // fontFamily: "sans-serif",
         overflow: "visible",
       }}
@@ -20,8 +27,8 @@ export default function Home() {
       {/* ❇️main */}
       <Box
         sx={{
-          width: "1440px",
-          maxHeight: "100vh",
+          width: "100%",
+          height: "100%",
           background: "linear-gradient(to bottom, #3D383E, #8260A2, #8260A2)",
           // border: "2px solid black",
           display: "flex",
@@ -30,6 +37,7 @@ export default function Home() {
           alignItems: "center",
           p: 4,
           overflowY: "scroll",
+          //overflow: "visible",
           position: "relative",
         }}
       >
