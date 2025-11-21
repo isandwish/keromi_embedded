@@ -5,21 +5,14 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    //     display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
-    // align-items: center;
-    // padding: 6rem;
-    // min-height: 100vh;
     <Box
       sx={{
-        width: "100vw", //1440
+        minwidth: "100vw", //1440
         minHeight: "100vh", //3120
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         bgcolor: "grey.400",
-        padding: "6rem",
         // fontFamily: "sans-serif",
         overflow: "visible",
       }}
@@ -36,8 +29,8 @@ export default function Home() {
           justifyContent: "flex-start",
           alignItems: "center",
           p: 4,
-          overflowY: "scroll",
-          //overflow: "visible",
+          // overflowY: "scroll",
+          overflow: "visible",
           position: "relative",
         }}
       >
@@ -66,7 +59,6 @@ export default function Home() {
               minHeight: "1093.04px",
               bgcolor: "#EEEEEE",
               borderRadius: "50%",
-              // mt: 10,
               // boxShadow: "0px 0px 60px 0px #C1AFD1",
               position: "relative",
               overflow: "visible",
