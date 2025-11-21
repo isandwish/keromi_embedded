@@ -8,7 +8,7 @@ export default function Home() {
     <Box
       sx={{
         width: "100vw",
-        minHeight: "100vh",
+        minHeight: "3120px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -21,7 +21,7 @@ export default function Home() {
       <Box
         sx={{
           width: "1440px",
-          minHeight: "3120px",
+          maxHeight: "100vh",
           background: "linear-gradient(to bottom, #3D383E, #8260A2, #8260A2)",
           // border: "2px solid black",
           display: "flex",
@@ -29,7 +29,7 @@ export default function Home() {
           justifyContent: "flex-start",
           alignItems: "center",
           p: 4,
-          overflow: "visible",
+          overflowY: "scroll",
           position: "relative",
         }}
       >
@@ -55,11 +55,11 @@ export default function Home() {
           <Box
             sx={{
               width: "1300px",
-              height: "1093.04px",
+              minHeight: "1093.04px",
               bgcolor: "#EEEEEE",
               borderRadius: "50%",
               // mt: 10,
-              boxShadow: "0px 0px 60px 0px #C1AFD1",
+              // boxShadow: "0px 0px 60px 0px #C1AFD1",
               position: "relative",
               overflow: "visible",
               display: "flex",
