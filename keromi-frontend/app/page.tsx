@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <Box
       sx={{
-        minWidth: "100vw", //1440
+        maxWidth: "360px", //1440
         minHeight: "100vh", //3120
         display: "flex",
         alignItems: "center",
