@@ -14,7 +14,7 @@ export default function Home() {
     <Box
       sx={{
         maxWidth: "1080px", //1440
-        maxHeight: "2214px", //3120
+        maxHeight: "100vh", //3120
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -36,7 +36,7 @@ export default function Home() {
           p: 4,
           overflow: "visible",
           position: "relative",
-          gap: "20px",
+          gap: "60px",
         }}
       >
         {/* ✳️row 1: timer⏱️ */}
@@ -48,8 +48,8 @@ export default function Home() {
         {/* ✳️row 3: temp❄️ + light💡 */}
         <Box
           sx={{
-            width: "325px",
-            height: "146px",
+            width: "977.38px",
+            height: "437.71px",
             display: "flex",
             justifyContent: "space-between",
           }}
@@ -61,8 +61,8 @@ export default function Home() {
         {/* ✳️row 4: humidity💧 + sound🔊 */}
         <Box
           sx={{
-            width: "325px",
-            height: "146px",
+            width: "977.38px",
+            height: "437.71px",
             display: "flex",
             justifyContent: "space-between",
           }}

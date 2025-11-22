@@ -1,6 +1,5 @@
 "use client";
 
-import { Gradient } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
@@ -8,10 +7,10 @@ export default function LightBox() {
     return (
         <Box
             sx={{
-                width: "154.75px",
+                width: "464.25px",
                 height: "100%",
-                borderRadius: "20px",
-                p: "6px",
+                borderRadius: "60px",
+                p: "30px",
                 display: "flex",
                 flexDirection: "column",
                 background: "linear-gradient(to right, #EEEEEE, #E0D7E8)",
@@ -23,8 +22,8 @@ export default function LightBox() {
             <Typography
             sx={{
                 color: "#EEEEEE",
-                fontSize: "13.12px",
-                borderRadius: "20px",
+                fontSize: "39.37px",
+                borderRadius: "60px",
                 width: "100%",
                 py: "2px",
                 px: "auto",
@@ -47,26 +46,25 @@ export default function LightBox() {
                 <Image
                 src="/img/light.svg"
                 alt="Light Icon"
-                width={45.21}
-                height={97.2}
+                width={135.62}
+                height={291.59}
                 className="object-contain"
                 />
 
                 {/* 💟ขวา: % + ข้อความ */}
                 <Box
                 sx={{
-                    width: "80px",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    ml: "6px",
-                    gap: "5px",
+                    ml: "50px",
+                    gap: "3px",
                 }}>
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "20px",
+                        fontSize: "57px",
                         fontWeight: "bold",
                     }}>
                         350 Lux
@@ -75,10 +73,10 @@ export default function LightBox() {
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "16px",
+                        fontSize: "46.13px",
                         fontWeight: "bold",
                     }}>
-                        Excellent!!
+                        Perfect!!
                     </Typography>
                 </Box>
             </Box>

@@ -1,6 +1,5 @@
 "use client";
 
-import { Gradient } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
@@ -8,10 +7,10 @@ export default function FocusBox() {
     return (
         <Box
           sx={{
-            width: "325px",
-            height: "146px",
+            width: "977.38px",
+            height: "437.71px",
             background: "linear-gradient(to right, #B19CC5, #8260A2, #3D383E)",
-            borderRadius: "20px",
+            borderRadius: "60px",
             boxShadow: "0px 0px 30px 0px #C1AFD1",
             mt: "35px",
             p: "15px",
@@ -33,14 +32,14 @@ export default function FocusBox() {
             {/* 💟detail: image */}
             <Box
               sx={{
-                mt: "-60px",
+                mt: "-100px",
               }}
             >
               <Image
                 src="/img/perfect.png" 
                 alt="Perfect Icon"
-                width={135}
-                height={128.07}
+                width={405}
+                height={384.23}
                 className="object-contain"
               />
             </Box>
@@ -50,7 +49,7 @@ export default function FocusBox() {
               sx={{
                 fontWeight: "bold",
                 color: "#EEEEEE",
-                fontSize: "24px",
+                fontSize: "72px",
                 mt: "5px"
               }}
             >
@@ -75,11 +74,13 @@ export default function FocusBox() {
               sx={{
                 fontWeight: "bold",
                 color: "#EEEEEE",
-                fontSize: "24px",
+                fontSize: "48.64px",
                 backgroundColor: "#3D383E",
-                px: "35px",
-                borderRadius: "20px",
-                mt: "10px",
+                px: "170px",
+                py: "10px",
+                borderRadius: "60px",
+                mt: "40px",
+                mr: "20px",
               }}
             >
               Focus
@@ -89,7 +90,7 @@ export default function FocusBox() {
               sx={{
                 fontWeight: "bold",
                 color: "#EEEEEE",
-                fontSize: "64px",
+                fontSize: "202.05px",
                 mt: "-2px"
               }}
             >

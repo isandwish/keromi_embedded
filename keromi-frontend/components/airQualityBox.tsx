@@ -1,6 +1,5 @@
 "use client";
 
-import { Gradient } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
@@ -8,10 +7,10 @@ export default function AirQualityBox() {
     return (
         <Box
             sx={{
-                width: "325px",
-                height: "146px",
-                borderRadius: "20px",
-                p: "6px",
+                width: "977.38px",
+                height: "437.71px",
+                borderRadius: "60px",
+                p: "30px",
                 display: "flex",
                 flexDirection: "column",
                 background: "linear-gradient(to right, #EEEEEE, #E0D7E8)",
@@ -23,8 +22,8 @@ export default function AirQualityBox() {
             <Typography
             sx={{
                 color: "#EEEEEE",
-                fontSize: "13.12px",
-                borderRadius: "20px",
+                fontSize: "39.37px",
+                borderRadius: "60px",
                 width: "100%",
                 py: "2px",
                 px: "auto",
@@ -48,35 +47,34 @@ export default function AirQualityBox() {
                 <Image
                 src="/img/air.svg"
                 alt="Air Quality Icon"
-                width={45.21}
-                height={97.2}
+                width={135.62}
+                height={291.59}
                 className="object-contain"
                 />
 
                 {/* 💟ขวา: % + ข้อความ */}
                 <Box
                 sx={{
-                    width: "80px",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    ml: "6px",
-                    gap: "5px",
+                    ml: "50px",
+                    gap: "3px",
                 }}>
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "30px",
+                        fontSize: "95px",
                         fontWeight: "bold",
                     }}>
-                        80
+                        85
                     </Typography>
 
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "16px",
+                        fontSize: "46.13px",
                         fontWeight: "bold",
                     }}>
                         Perfect!!
