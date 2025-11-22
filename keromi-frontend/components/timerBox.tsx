@@ -9,7 +9,7 @@ export default function TimerBox() {
         sx={{
             justifyContent: "center",
             justifyItems: "center",
-            mt: "400px",
+            mt: "1000px",
         }}>
             {/* ✳️head: 🩷 */}
             <Box
