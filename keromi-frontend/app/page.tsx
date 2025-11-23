@@ -13,14 +13,14 @@ export default function Home() {
   return (
     <Box
       sx={{
-        maxWidth: "100vw", //1440
-        maxHeight: "100vh", //3120
+        // maxWidth: "100vw", //1440
+        minHeight: "100vh", //3120
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        bgcolor: "grey.400",
-        // fontFamily: "sans-serif",
+        // bgcolor: "grey.400",
         overflow: "visible",
+        // padding: 6,
       }}
     >
       {/* ❇️main */}
@@ -36,7 +36,7 @@ export default function Home() {
           p: 4,
           overflow: "visible",
           position: "relative",
-          gap: "60px",
+          gap: "20px",
         }}
       >
         {/* ✳️row 1: timer⏱️ */}
@@ -48,8 +48,7 @@ export default function Home() {
         {/* ✳️row 3: temp❄️ + light💡 */}
         <Box
           sx={{
-            width: "977.38px",
-            height: "437.71px",
+            width: "354.79px",
             display: "flex",
             justifyContent: "space-between",
           }}
@@ -61,8 +60,7 @@ export default function Home() {
         {/* ✳️row 4: humidity💧 + sound🔊 */}
         <Box
           sx={{
-            width: "977.38px",
-            height: "437.71px",
+            width: "354.79px",
             display: "flex",
             justifyContent: "space-between",
           }}

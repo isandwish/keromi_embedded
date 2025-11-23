@@ -7,10 +7,10 @@ export default function TemperatureBox() {
     return (
         <Box
             sx={{
-                width: "464.25px",
+                width: "168.94px",
                 height: "100%",
-                borderRadius: "60px",
-                p: "30px",
+                borderRadius: "21.83px",
+                p: "10px",
                 display: "flex",
                 flexDirection: "column",
                 background: "linear-gradient(to right, #EEEEEE, #E0D7E8)",
@@ -22,7 +22,7 @@ export default function TemperatureBox() {
             <Typography
             sx={{
                 color: "#EEEEEE",
-                fontSize: "39.37px",
+                fontSize: "14.32px",
                 borderRadius: "60px",
                 width: "100%",
                 py: "2px",
@@ -46,8 +46,8 @@ export default function TemperatureBox() {
                 <Image
                 src="/img/temp.svg"
                 alt="Temperature Icon"
-                width={135.62}
-                height={291.59}
+                width={49.35}
+                height={106.11}
                 className="object-contain"
                 />
 
@@ -58,13 +58,13 @@ export default function TemperatureBox() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    ml: "50px",
+                    ml: "15px",
                     gap: "3px",
                 }}>
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "95px",
+                        fontSize: "33.57px",
                         fontWeight: "bold",
                     }}>
                         26 ํC
@@ -73,7 +73,7 @@ export default function TemperatureBox() {
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "46.13px",
+                        fontSize: "16.79px",
                         fontWeight: "bold",
                     }}>
                         Perfect!!

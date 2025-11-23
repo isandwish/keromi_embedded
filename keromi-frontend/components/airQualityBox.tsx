@@ -7,10 +7,10 @@ export default function AirQualityBox() {
     return (
         <Box
             sx={{
-                width: "977.38px",
-                height: "437.71px",
-                borderRadius: "60px",
-                p: "30px",
+                width: "354.79px",
+                height: "100%",
+                borderRadius: "21.83px",
+                p: "10px",
                 display: "flex",
                 flexDirection: "column",
                 background: "linear-gradient(to right, #EEEEEE, #E0D7E8)",
@@ -22,7 +22,7 @@ export default function AirQualityBox() {
             <Typography
             sx={{
                 color: "#EEEEEE",
-                fontSize: "39.37px",
+                fontSize: "14.32px",
                 borderRadius: "60px",
                 width: "100%",
                 py: "2px",
@@ -47,8 +47,8 @@ export default function AirQualityBox() {
                 <Image
                 src="/img/air.svg"
                 alt="Air Quality Icon"
-                width={135.62}
-                height={291.59}
+                width={49.35}
+                height={106.11}
                 className="object-contain"
                 />
 
@@ -59,13 +59,13 @@ export default function AirQualityBox() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    ml: "50px",
+                    ml: "15px",
                     gap: "3px",
                 }}>
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "95px",
+                        fontSize: "30px",
                         fontWeight: "bold",
                     }}>
                         85
@@ -74,7 +74,7 @@ export default function AirQualityBox() {
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "46.13px",
+                        fontSize: "16.79px",
                         fontWeight: "bold",
                     }}>
                         Perfect!!

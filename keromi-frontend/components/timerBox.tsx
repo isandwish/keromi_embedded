@@ -9,7 +9,7 @@ export default function TimerBox() {
         sx={{
             justifyContent: "center",
             justifyItems: "center",
-            mt: "1300px",
+            // mt: "1300px",
         }}>
             {/* ✳️head: 🩷 */}
             <Box
@@ -21,8 +21,8 @@ export default function TimerBox() {
                 <Image
                     src="/img/head.png"
                     alt="Keromi Logo"
-                    width={277.57}
-                    height={216}
+                    width={101.01}
+                    height={78.6}
                 />
             </Box>
 
@@ -30,8 +30,8 @@ export default function TimerBox() {
             {/* 💟detail: วงกลม🟣 */}
             <Box
             sx={{
-                width: "975px", 
-                height: "819.78px",
+                width: "354.79px", 
+                height: "298.31px",
                 bgcolor: "#EEEEEE",
                 borderRadius: "50%",
                 // boxShadow: "0px 0px 60px 0px #C1AFD1",
@@ -53,19 +53,25 @@ export default function TimerBox() {
                     flexDirection: "row",
                     justifyItems: "center",
                     alignItems: "center",
-                    mt: "110px",
-                    gap: "30px",
+                    mt: "30px",
+                    gap: "10px",
                 }}
                 >
                     {/* ปุ่มตั้งค่า (ซ้าย) */}
-                    <button className="px-2 py-1 rounded-lg bg-[#8260A2] text-white font-bold text-6xl">
+                    <button className="
+                    px-2 py-1 
+                    rounded-lg 
+                    bg-[#8260A2] 
+                    text-white 
+                    font-bold 
+                    text-xl">
                     ปุ่ม
                     </button>
 
                     {/* ตัวเลข */}
                     <Typography
                     sx={{
-                    fontSize: "184.45px",
+                    fontSize: "67.12px",
                     fontWeight: "bold",
                     color: "#3D383E",
                     textAlign: "center",
@@ -76,14 +82,17 @@ export default function TimerBox() {
                     </Typography>
 
                     {/* ปุ่มเริ่ม (ขวา) */}
-                    <button className="px-2 py-1 rounded-lg bg-[#3D383E] text-white font-bold text-6xl">
+                    <button className="
+                    px-2 py-1 rounded-lg 
+                    bg-[#3D383E] text-white 
+                    font-bold text-xl">
                         ปุ่ม
                     </button>
                 </Box>
 
                 <Typography
                 sx={{
-                    fontSize: "54.69px",
+                    fontSize: "19.9px",
                     color: "#8260A2",
                     fontWeight: "bold",
                 }}>

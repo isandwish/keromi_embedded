@@ -7,10 +7,10 @@ export default function FocusBox() {
     return (
         <Box
           sx={{
-            width: "977.38px",
-            height: "437.71px",
+            width: "354.79px",
+            height: "158.32px",
             background: "linear-gradient(to right, #B19CC5, #8260A2, #3D383E)",
-            borderRadius: "60px",
+            borderRadius: "21.83px",
             boxShadow: "0px 0px 30px 0px #C1AFD1",
             mt: "35px",
             p: "15px",
@@ -32,14 +32,14 @@ export default function FocusBox() {
             {/* 💟detail: image */}
             <Box
               sx={{
-                mt: "-100px",
+                mt: "-60px",
               }}
             >
               <Image
                 src="/img/perfect.png" 
                 alt="Perfect Icon"
-                width={405}
-                height={384.23}
+                width={147.38}
+                height={139.82}
                 className="object-contain"
               />
             </Box>
@@ -49,7 +49,7 @@ export default function FocusBox() {
               sx={{
                 fontWeight: "bold",
                 color: "#EEEEEE",
-                fontSize: "72px",
+                fontSize: "26.2px",
                 mt: "5px"
               }}
             >
@@ -74,13 +74,13 @@ export default function FocusBox() {
               sx={{
                 fontWeight: "bold",
                 color: "#EEEEEE",
-                fontSize: "48.64px",
+                fontSize: "17.7px",
                 backgroundColor: "#3D383E",
-                px: "170px",
-                py: "10px",
+                px: "50px",
+                py: "3px",
                 borderRadius: "60px",
-                mt: "40px",
-                mr: "20px",
+                mt: "10px",
+                // mr: "20px",
               }}
             >
               Focus
@@ -90,8 +90,8 @@ export default function FocusBox() {
               sx={{
                 fontWeight: "bold",
                 color: "#EEEEEE",
-                fontSize: "202.05px",
-                mt: "-2px"
+                fontSize: "73.52px",
+                // mt: "-2px"
               }}
             >
               90%
