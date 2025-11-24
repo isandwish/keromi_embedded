@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
-import Setting from "@/app/setting/page";
+// import Setting from "@/app/setting/page";
 
 export default function TimerBox() {
   const router = useRouter();
