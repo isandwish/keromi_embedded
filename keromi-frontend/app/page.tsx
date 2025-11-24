@@ -8,8 +8,11 @@ import AirQualityBox from "@/components/airQualityBox";
 import SoundBox from "@/components/soundBox";
 import FocusBox from "@/components/focusBox";
 import TimerBox from "@/components/timerBox";
+import AirMQ2Box from "@/components/airMQ2Box";
+import AirMQ135Box from "@/components/airMQ135Box";
 
 export default function Home() {
+
   return (
     <Box
       sx={{
@@ -69,8 +72,20 @@ export default function Home() {
           <SoundBox />
         </Box>
 
-        {/* ✳️row 5: คุณภาพอากาศ☁️*/}
-        <AirQualityBox />
+        {/* ✳️row 5: airMQ-2💨 + airMQ-135☁️ */}
+        <Box
+          sx={{
+            width: "354.79px",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <AirMQ2Box />
+          <AirMQ135Box />
+        </Box>
+
+        {/* ✳️row 5: คุณภาพอากาศ☁️ */}
+        {/* <AirQualityBox /> */}
       
       </Box>
     </Box>

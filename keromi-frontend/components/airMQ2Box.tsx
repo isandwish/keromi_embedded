@@ -6,8 +6,9 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function SoundBox() {
-    const [sound, setSound] = useState<number | null>(null);
+export default function AirMQ2Box() {
+
+    const [gas, setGas] = useState<number | null>(null);
     
         useEffect(() => {
             async function load() {
@@ -15,12 +16,12 @@ export default function SoundBox() {
             const values = Object.values(result);
             if (values.length > 0) {
                 const latest = values[values.length - 1]; // latest is SensorData
-                setSound(latest.sound);
+                setGas(latest.gas);
             }
             }
             load();
         }, []);
-        
+
     return (
                 <Box
                     sx={{
@@ -48,7 +49,7 @@ export default function SoundBox() {
                         fontWeight: "bold",
                         textAlign: "center"
                     }}>
-                        Sound 🔊
+                        Air MQ-2 💨
                     </Typography>
         
                     {/* 💟เนื้อหาแบ่งซ้าย/ขวา */}
@@ -61,8 +62,8 @@ export default function SoundBox() {
                     }}>
                         {/* 💟ซ้าย: รูป */}
                         <Image
-                        src="/img/sound.svg"
-                        alt="Sound Icon"
+                        src="/img/air.svg"
+                        alt="Air Quality Icon"
                         width={49.35}
                         height={106.11}
                         className="object-contain"
@@ -84,7 +85,7 @@ export default function SoundBox() {
                                 fontSize: "22px",
                                 fontWeight: "bold",
                             }}>
-                                {sound !== null ? `${sound} dB` : "..."} {/* แสดง sound จาก backend */}
+                                {gas !== null ? `${gas} ` : "..."} {/* แสดง gas จาก backend */}
                             </Typography>
         
                             <Typography

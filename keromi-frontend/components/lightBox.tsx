@@ -1,9 +1,27 @@
 "use client";
 
+import { SensorData } from "@/interfaces";
+import getData from "@/libs/getData";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function LightBox() {
+
+    const [light, setLight] = useState<number | null>(null);
+        
+            useEffect(() => {
+                async function load() {
+                const result: Record<string, SensorData> = await getData();
+                const values = Object.values(result);
+                if (values.length > 0) {
+                    const latest = values[values.length - 1]; // latest is SensorData
+                    setLight(latest.light);
+                }
+                }
+                load();
+            }, []);
+
     return (
             <Box
                 sx={{
@@ -31,7 +49,7 @@ export default function LightBox() {
                     fontWeight: "bold",
                     textAlign: "center"
                 }}>
-                    Light
+                    Light 💡
                 </Typography>
     
                 {/* 💟เนื้อหาแบ่งซ้าย/ขวา */}
@@ -67,7 +85,7 @@ export default function LightBox() {
                             fontSize: "22px",
                             fontWeight: "bold",
                         }}>
-                            350 Lux
+                            {light !== null ? `${light}` : "..."} {/* แสดง light จาก backend */}
                         </Typography>
     
                         <Typography

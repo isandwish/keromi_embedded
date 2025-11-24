@@ -1,9 +1,38 @@
 "use client";
 
+import getData from "@/libs/getData";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { SensorData } from "@/interfaces";
+
 
 export default function TemperatureBox() {
+    // const [data, setData] = useState(null);
+    
+    //   useEffect(() => {
+    //     async function load() {
+    //       const result = await getData();
+    //       console.log(result); 
+    //       setData(result);
+    //     }
+    //     load();
+    //   }, []);
+
+    const [temp, setTemp] = useState<number | null>(null);
+
+    useEffect(() => {
+        async function load() {
+        const result: Record<string, SensorData> = await getData();
+        const values = Object.values(result);
+        if (values.length > 0) {
+            const latest = values[values.length - 1]; // latest is SensorData
+            setTemp(latest.temp);
+        }
+        }
+        load();
+    }, []);
+      
     return (
         <Box
             sx={{
@@ -31,7 +60,7 @@ export default function TemperatureBox() {
                 fontWeight: "bold",
                 textAlign: "center"
             }}>
-                Temperature
+                Temperature ❄️
             </Typography>
 
             {/* 💟เนื้อหาแบ่งซ้าย/ขวา */}
@@ -64,10 +93,10 @@ export default function TemperatureBox() {
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "33.57px",
+                        fontSize: "28px",
                         fontWeight: "bold",
                     }}>
-                        26 ํC
+                        {temp !== null ? `${temp} ํC` : "..."} {/* แสดง temp จาก backend */}
                     </Typography>
 
                     <Typography
