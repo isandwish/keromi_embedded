@@ -2,7 +2,7 @@
 #include <time.h>
 
 void initTime() {
-    // GMT+7 (ประเทศไทย)
+    // GMT+7 (Thailand)
     configTime(7 * 3600, 0, 
                "pool.ntp.org", 
                "time.nist.gov",
@@ -11,7 +11,7 @@ void initTime() {
     Serial.print("Syncing time...");
     
     time_t now = time(nullptr);
-    while (now < 1700000000) {   // ถ้าน้อยกว่าเวลาปี 2023 แปลว่ายังไม่ได้ sync
+    while (now < 1700000000) {   // If it is less than 2023, it means it has not been synced.
         Serial.print(".");
         delay(500);
         now = time(nullptr);

@@ -1,20 +1,32 @@
-#include <Arduino.h>
 #include "ky015.h"
-#include "DHT.h"
+#include <DHT.h>
 
-#define DHT_PIN 4
-#define DHT_TYPE DHT11
+static DHT dhtSensor(0, 0);
 
-DHT dht(DHT_PIN, DHT_TYPE);
+static float prevTemp = 0;
+static float prevHum = 0;
 
-void sensor_ky015_init() {
-    dht.begin();
+void ky015_init(int pin) {
+    dhtSensor = DHT(pin, DHT11);
+    dhtSensor.begin();
 }
 
-float sensor_ky015_readTemperature() {
-    return dht.readTemperature();
+float ky015_readTemperature() {
+    return dhtSensor.readTemperature();
 }
 
-float sensor_ky015_readHumidity() {
-    return dht.readHumidity();
+float ky015_readHumidity() {
+    return dhtSensor.readHumidity();
+}
+
+float ky015_smoothTemperature(float raw) {
+    const float alpha = 0.3;
+    prevTemp = alpha * raw + (1 - alpha) * prevTemp;
+    return prevTemp;
+}
+
+float ky015_smoothHumidity(float raw) {
+    const float alpha = 0.3;
+    prevHum = alpha * raw + (1 - alpha) * prevHum;
+    return prevHum;
 }

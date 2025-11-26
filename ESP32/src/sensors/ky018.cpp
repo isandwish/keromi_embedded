@@ -1,12 +1,13 @@
-#include <Arduino.h>
 #include "ky018.h"
 
-#define LDR_PIN 34
+static int LDR_PIN = -1;
 
-void sensor_ky018_init() {
+void ky018_init(int pin) {
+    LDR_PIN = pin;
     pinMode(LDR_PIN, INPUT);
 }
 
-int sensor_ky018_readLight() {
+int ky018_readRaw() {
+    if (LDR_PIN == -1) return -1;
     return analogRead(LDR_PIN);
 }

@@ -3,17 +3,23 @@
 #include <WiFi.h>
 
 #include "firebase_cloud.h"
-#include "config.h" 
+#include "config.h"
 
 void firebase_init() {
     Serial.println("Firebase initialized.");
 }
 
-void firebase_send(float t, float h, int light, unsigned long timestamp) {
-    if (WiFi.status() != WL_CONNECTED) {
-        Serial.println("WiFi not connected!");
-        return;
-    }
+void firebase_send_all(
+    float temp,
+    float hum,
+    float mq2,
+    float mq135,
+    float light,
+    float sound,
+    String pirStatus,
+    unsigned long timestamp
+) {
+    if (WiFi.status() != WL_CONNECTED) return;
 
     HTTPClient http;
 
@@ -23,11 +29,16 @@ void firebase_send(float t, float h, int light, unsigned long timestamp) {
     http.addHeader("Content-Type", "application/json");
 
     String json =
-        "{ \"temperature\": " + String(t) +
-        ", \"humidity\": "   + String(h) +
-        ", \"light\": "      + String(light) +
-        ", \"timestamp\": "  + String(timestamp) +
-        " }";
+    "{"
+        "\"temperature\": " + String(temp) + ","
+        "\"humidity\": "    + String(hum) + ","
+        "\"mq2\": "          + String(mq2) + ","
+        "\"mq135\": "        + String(mq135) + ","
+        "\"light\": "        + String(light) + ","
+        "\"sound\": "        + String(sound) + ","
+        "\"pir\": \""        + pirStatus + "\","
+        "\"timestamp\": "    + String(timestamp) +
+    "}";
 
     int code = http.PUT(json);
 
