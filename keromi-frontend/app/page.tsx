@@ -2,7 +2,7 @@
 
 import TemperatureBox from "@/components/temperatureBox";
 import LightBox from "@/components/lightBox";
-import { Box } from "@mui/material";
+import { Box,TextField } from "@mui/material";
 import HumidityBox from "@/components/humidBox";
 import AirQualityBox from "@/components/airQualityBox";
 import SoundBox from "@/components/soundBox";
@@ -10,8 +10,28 @@ import FocusBox from "@/components/focusBox";
 import TimerBox from "@/components/timerBox";
 import AirMQ2Box from "@/components/airMQ2Box";
 import AirMQ135Box from "@/components/airMQ135Box";
+import { useEffect, useState } from "react";
+import getData from "@/libs/getData";
+import { SensorData } from "@/interfaces";
 
 export default function Home() {
+  const [data, setData] = useState<SensorData | null>(null);
+
+    useEffect(() => {
+      async function load() {
+        const result: SensorData = await getData(); // เปลี่ยน type เป็น SensorData
+        console.log("Received data:", result);
+        setData(result); // setState ตรง ๆ
+      }
+      load();
+    }, []);
+
+      if (data != null) {
+    console.log(data.light);       // 2799
+    console.log(data.humidity);    // 64.5
+    console.log(data.temperature); // 25.3
+    console.log(data.sound);       // -120
+  }
 
   return (
     <Box
@@ -44,7 +64,12 @@ export default function Home() {
       >
         {/* ✳️row 1: timer⏱️ */}
         <TimerBox />
-
+        <TextField
+        label={data?.pir ?? null}    // แสดง label ด้านบน
+        placeholder="Type here..." // placeholder
+        size="small"             // ทำให้ TextBox เล็ก
+        variant="outlined"       // หรือ filled / standard
+        />
         {/* ✳️row 2: focus*/}
         <FocusBox />
 
@@ -56,8 +81,8 @@ export default function Home() {
             justifyContent: "space-between",
           }}
         >
-          <TemperatureBox />
-          <LightBox />
+          <TemperatureBox temp={data?.temperature ?? null}/>
+          <LightBox light={data?.light.value ?? null}/>
         </Box>
 
         {/* ✳️row 4: humidity💧 + sound🔊 */}
@@ -68,12 +93,12 @@ export default function Home() {
             justifyContent: "space-between",
           }}
         >
-          <HumidityBox />
-          <SoundBox />
+          <HumidityBox humid={data?.humidity ?? null}/>
+          <SoundBox value={data?.sound.value ?? null} level={data?.sound.level?? null}/>
         </Box>
 
         {/* ✳️row 5: airMQ-2💨 + airMQ-135☁️ */}
-        <Box
+        {/* <Box
           sx={{
             width: "354.79px",
             display: "flex",
@@ -82,10 +107,10 @@ export default function Home() {
         >
           <AirMQ2Box />
           <AirMQ135Box />
-        </Box>
+        </Box> */}
 
         {/* ✳️row 5: คุณภาพอากาศ☁️ */}
-        {/* <AirQualityBox /> */}
+        <AirQualityBox value={data?.gas.value ?? null} level={data?.gas.level ?? null}/>
       
       </Box>
     </Box>

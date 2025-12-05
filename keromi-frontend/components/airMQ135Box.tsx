@@ -8,19 +8,19 @@ import { useEffect, useState } from "react";
 
 export default function AirMQ135Box() {
 
-    const [gas, setGas] = useState<number | null>(null);
+    // const [gas, setGas] = useState<number | null>(null);
     
-        useEffect(() => {
-            async function load() {
-            const result: Record<string, SensorData> = await getData();
-            const values = Object.values(result);
-            if (values.length > 0) {
-                const latest = values[values.length - 1]; // latest is SensorData
-                setGas(latest.gas);
-            }
-            }
-            load();
-        }, []);
+    //     useEffect(() => {
+    //         async function load() {
+    //         const result: Record<string, SensorData> = await getData();
+    //         const values = Object.values(result);
+    //         if (values.length > 0) {
+    //             const latest = values[values.length - 1]; // latest is SensorData
+    //             setGas(latest.gas);
+    //         }
+    //         }
+    //         load();
+    //     }, []);
 
     return (
                 <Box
@@ -85,7 +85,7 @@ export default function AirMQ135Box() {
                                 fontSize: "22px",
                                 fontWeight: "bold",
                             }}>
-                                {gas !== null ? `${gas} ` : "..."} {/* แสดง gas จาก backend */}
+                                {/* {gas !== null ? `${gas} ` : "..."} แสดง gas จาก backend */}
                             </Typography>
         
                             <Typography

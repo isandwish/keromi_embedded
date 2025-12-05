@@ -1,9 +1,11 @@
 "use client";
 
+import { GasBoxProps } from "@/interfaces";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
-export default function AirQualityBox() {
+
+export default function AirQualityBox({level,value}:GasBoxProps) {
     return (
         <Box
             sx={{
@@ -68,7 +70,7 @@ export default function AirQualityBox() {
                         fontSize: "30px",
                         fontWeight: "bold",
                     }}>
-                        85
+                        {value}
                     </Typography>
 
                     <Typography
@@ -77,7 +79,7 @@ export default function AirQualityBox() {
                         fontSize: "16.79px",
                         fontWeight: "bold",
                     }}>
-                        Perfect!!
+                        {level}
                     </Typography>
                 </Box>
             </Box>

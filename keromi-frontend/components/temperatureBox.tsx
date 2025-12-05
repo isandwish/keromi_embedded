@@ -6,33 +6,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { SensorData } from "@/interfaces";
 
+import { TemperatureBoxProps } from "@/interfaces";
 
-export default function TemperatureBox() {
-    // const [data, setData] = useState(null);
-    
-    //   useEffect(() => {
-    //     async function load() {
-    //       const result = await getData();
-    //       console.log(result); 
-    //       setData(result);
-    //     }
-    //     load();
-    //   }, []);
+export default function TemperatureBox({ temp }: TemperatureBoxProps) {
 
-    const [temp, setTemp] = useState<number | null>(null);
-
-    useEffect(() => {
-        async function load() {
-        const result: Record<string, SensorData> = await getData();
-        const values = Object.values(result);
-        if (values.length > 0) {
-            const latest = values[values.length - 1]; // latest is SensorData
-            setTemp(latest.temp);
-        }
-        }
-        load();
-    }, []);
-      
     return (
         <Box
             sx={{

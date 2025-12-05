@@ -5,22 +5,10 @@ import getData from "@/libs/getData";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { HumidBoxProps } from "@/interfaces";
 
-export default function HumidityBox() {
+export default function HumidityBox({ humid }: HumidBoxProps) {
 
-    const [hum, setHum] = useState<number | null>(null);
-    
-        useEffect(() => {
-            async function load() {
-            const result: Record<string, SensorData> = await getData();
-            const values = Object.values(result);
-            if (values.length > 0) {
-                const latest = values[values.length - 1]; // latest is SensorData
-                setHum(latest.hum);
-            }
-            }
-            load();
-        }, []);
 
     return (
                 <Box
@@ -85,7 +73,7 @@ export default function HumidityBox() {
                                 fontSize: "20px",
                                 fontWeight: "bold",
                             }}>
-                                {hum !== null ? `${hum}%RH` : "..."} {/* แสดง hum จาก backend */}
+                                {humid !== null ? `${humid}%RH` : "..."} {/* แสดง hum จาก backend */}
                             </Typography>
         
                             <Typography
