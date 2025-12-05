@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import TimerStopwatchSwitch from "./materialUISwitch";
 import PomodoroSettingPopup from "./pomodoroSettingPopup";
+import AwakePopup from "./awakePopup"; // Assume AwakePopup is a component that accepts 'open' and 'onClose' props
 
 export default function TimerBox() {
   const safeSeconds = (val: number | null) => {
@@ -32,9 +33,12 @@ export default function TimerBox() {
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [mode, setMode] = useState<"pomodoro" | "stopwatch">("pomodoro");
   const [isOnBreak, setIsOnBreak] = useState<boolean>(false);
+  // State สำหรับเปิด/ปิด Pomodoro Setting Popup
   const [openPopup, setOpenPopup] = useState<boolean>(false);
-  // State: ติดตามว่ามีการเริ่มจับเวลาไปแล้วหรือยัง (ใช้สำหรับแสดงปุ่ม Stop ค้างไว้ใน Pomodoro)
+  // State: ติดตามว่ามีการเริ่มจับเวลาไปแล้วหรือยัง (ใช้สำหรับแสดงปุ่ม Stop ค้างไว้ใน Pomodoro และ Logic เริ่มเวลาต่อ)
   const [isTimeSet, setIsTimeSet] = useState<boolean>(false);
+  // State สำหรับควบคุมการเปิด/ปิด AwakePopup
+  const [openAwakePopup, setOpenAwakePopup] = useState<boolean>(false);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -88,11 +92,11 @@ export default function TimerBox() {
   // ------------------------------
   const handlePomodoroStartPause = () => {
     setIsRunning((prev) => {
-        // ถ้าสถานะเดิมเป็น 'ไม่วิ่ง' (กำลังจะเริ่ม) ให้ตั้งค่า isTimeSet เป็น true
-        if (!prev) {
-            setIsTimeSet(true);
-        }
-        return !prev;
+      // ถ้าสถานะเดิมเป็น 'ไม่วิ่ง' (กำลังจะเริ่ม) ให้ตั้งค่า isTimeSet เป็น true
+      if (!prev) {
+        setIsTimeSet(true);
+      }
+      return !prev;
     });
   };
 
@@ -100,10 +104,10 @@ export default function TimerBox() {
   // ▶ Stopwatch Start
   // ------------------------------
   const handleStopwatchStart = () => {
-      // ใน Stopwatch, Start ก็คือการรัน
-      setIsTimeSet(true); 
-      setIsRunning(true);
-  }
+    // ใน Stopwatch, Start ก็คือการรัน
+    setIsTimeSet(true);
+    setIsRunning(true);
+  };
 
   // ------------------------------
   // ❌ Stop/Cancel (Reset)
@@ -112,13 +116,26 @@ export default function TimerBox() {
     setIsRunning(false);
     setIsOnBreak(false);
     // เมื่อกด Stop ให้ reset isTimeSet เป็น false
-    setIsTimeSet(false); 
-    
+    setIsTimeSet(false);
+
     if (mode === "pomodoro") {
-        setTimeLeft(focusTime);
+      setTimeLeft(focusTime);
     } else {
-        setTimeLeft(0);
+      setTimeLeft(0);
     }
+  };
+  
+  // ------------------------------------
+  // 💡 NEW: จัดการเมื่อปิด AwakePopup
+  // ------------------------------------
+  const handleAwakePopupClose = () => {
+      setOpenAwakePopup(false);
+      
+      // ถ้าเคยมีการกด Start/Play มาก่อน (isTimeSet = true) และเวลาควรเดินต่อในโหมด Pomodoro/Stopwatch
+      // ให้กลับมาเริ่มจับเวลาต่อ
+      if (isTimeSet) {
+          setIsRunning(true);
+      }
   };
 
   // ------------------------------
@@ -127,7 +144,7 @@ export default function TimerBox() {
   const handleSaveSetting = (focusSec: number, breakSec: number) => {
     const safeFocus = safeSeconds(focusSec);
     const safeBreak = safeSeconds(breakSec);
-    
+
     localStorage.setItem("timerSeconds", safeFocus.toString());
     localStorage.setItem("breakTimeSeconds", safeBreak.toString());
 
@@ -147,6 +164,8 @@ export default function TimerBox() {
     setIsRunning(false);
     setIsOnBreak(false);
     setIsTimeSet(false);
+    // ปิด AwakePopup เมื่อสลับโหมด
+    setOpenAwakePopup(false);
 
     if (m === "pomodoro") {
       const saved = localStorage.getItem("timerSeconds");
@@ -207,19 +226,19 @@ export default function TimerBox() {
 
         {/* Time Display */}
         <Typography
-            onClick={() => setOpenPopup(true)}
-            sx={{
-              fontSize: "40px",
-              fontWeight: "bold",
-              color: "#3D383E",
-              textAlign: "center",
-              zIndex: 2,
-              cursor: "pointer",
-              userSelect: "none",
-            }}
-          >
-            {formatTime(timeLeft)}
-          </Typography>
+          onClick={() => setOpenPopup(true)}
+          sx={{
+            fontSize: "40px",
+            fontWeight: "bold",
+            color: "#3D383E",
+            textAlign: "center",
+            zIndex: 2,
+            cursor: "pointer",
+            userSelect: "none",
+          }}
+        >
+          {formatTime(timeLeft)}
+        </Typography>
 
         {/* ------------------------------ */}
         {/* ⏸️ Play/Pause/Stop Buttons */}
@@ -259,11 +278,11 @@ export default function TimerBox() {
               </IconButton>
             )
           )}
-          
+
           {/* ------------------------------------- */}
           {/* 2. ปุ่ม Stop: แสดงเมื่อ Pomodoro ถูกเริ่มแล้ว หรือ Stopwatch กำลังวิ่งอยู่ */}
           {/* ------------------------------------- */}
-          {(mode === "pomodoro" && isTimeSet) || (mode === "stopwatch" && isRunning) ? (
+          {(mode === "pomodoro" && isTimeSet) || (mode === "stopwatch" && isTimeSet) ? ( // เปลี่ยนจาก isRunning เป็น isTimeSet สำหรับ Stopwatch เพื่อแสดงปุ่ม Stop แม้จะหยุดชั่วคราว
             <IconButton onClick={handleStop} sx={iconButtonStyle}>
               <Image
                 src="/img/stop.svg"
@@ -285,6 +304,7 @@ export default function TimerBox() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            mb: 2 // เพิ่มระยะห่างด้านล่างเล็กน้อย
           }}
         >
           {isTimeSet && mode === "pomodoro" && (
@@ -304,7 +324,7 @@ export default function TimerBox() {
         </Box>
       </Box>
 
-      {/* Popup */}
+      {/* Pomodoro Setting Popup */}
       <PomodoroSettingPopup
         open={openPopup}
         onClose={() => setOpenPopup(false)}
@@ -312,6 +332,32 @@ export default function TimerBox() {
         defaultFocus={focusTime}
         defaultBreak={breakTime}
       />
+      
+      {/* 💡 AwakePopup (ถูกเพิ่มเข้ามาควบคุมด้วย State ใหม่) */}
+      <AwakePopup
+        open={openAwakePopup}
+        onClose={handleAwakePopupClose} // ใช้ฟังก์ชันที่ปรับปรุงใหม่
+      />
+
+      {/* 🚨 ปุ่ม Test (จำลองการแจ้งเตือนจาก Backend ว่าคนหาย) */}
+      <IconButton 
+        onClick={() => {
+            // เงื่อนไข: ถ้าเคยมีการกด Start/Play แล้ว (isTimeSet = true)
+            if (isTimeSet) { 
+                setIsRunning(false); // หยุดเวลา
+                setOpenAwakePopup(true); // เปิด AwakePopup
+            }
+        }} 
+        sx={iconButtonStyle}
+      >
+        <Image
+          src="/img/stop.svg"
+          alt="Simulate User Away Trigger"
+          width={32}
+          height={32}
+        />
+        {/* <Typography sx={{ ml: 1, color: "#001e3c", fontWeight: 'bold' }}>Test Alert</Typography> */}
+      </IconButton>
     </Box>
   );
 }

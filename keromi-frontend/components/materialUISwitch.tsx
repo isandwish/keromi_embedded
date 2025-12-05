@@ -4,7 +4,7 @@ import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 
-const ModeSwitch = styled(Switch)(({ theme }) => ({
+const ModeSwitch = styled(Switch)(({}) => ({
   width: 62,
   height: 34,
   padding: 7,
