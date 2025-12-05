@@ -21,7 +21,9 @@ void blynk_send(
     float mq2,
     float mq135,
     float light,
-    float sound,
+    float rms,
+    float avgAbs,
+    float peak,
     String pirStatus
 ) {
     Blynk.virtualWrite(V0, temp);
@@ -29,6 +31,8 @@ void blynk_send(
     Blynk.virtualWrite(V2, mq2);
     Blynk.virtualWrite(V3, mq135);
     Blynk.virtualWrite(V4, light);
-    Blynk.virtualWrite(V5, sound);
+    Blynk.virtualWrite(V5, rms);
+    Blynk.virtualWrite(V7, avgAbs);
+    Blynk.virtualWrite(V8, peak);
     Blynk.virtualWrite(V6, pirStatus);
 }

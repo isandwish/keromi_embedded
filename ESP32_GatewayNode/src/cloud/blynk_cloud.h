@@ -9,7 +9,9 @@ void blynk_send(
     float mq2,
     float mq135,
     float light,
-    float sound,
+    float rms,
+    float avgAbs,
+    float peak,
     String pirStatus
 );
 #endif

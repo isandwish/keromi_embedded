@@ -2,6 +2,9 @@
 #define INMP441_H
 
 void inmp441_init(int bclk, int ws, int sd);
-float inmp441_read_db();
+
+float mic_rms();
+float mic_avgAbs();
+float mic_peak();
 
 #endif
