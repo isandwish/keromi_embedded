@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import TimerStopwatchSwitch from "./materialUISwitch";
 import PomodoroSettingPopup from "./pomodoroSettingPopup";
+import { PIRProps } from "@/interfaces";
 
 export default function TimerBox() {
   const safeSeconds = (val: number | null) => {
