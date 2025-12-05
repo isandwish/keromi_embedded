@@ -1,10 +1,10 @@
-export default async function getData(){
-    const response = await fetch(`http://10.80.88.141:5000/api/sensor`);
-    console.log(response )
+export default async function getData() {
+    const url = process.env.BACKEND_URL+`/api/v1/sensor`;
+    console.log("Fetching:", url);
 
-    if(!response.ok){
-        throw new Error('Failed to fetch data');
-    }
+    const res = await fetch(url, { cache: "no-store" });
 
-    return await response.json();
+    if (!res.ok) throw new Error("Failed to fetch data");
+
+    return res.json();
 }
