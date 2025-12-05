@@ -7,7 +7,7 @@
 extern float g_temp, g_hum;
 extern int g_light, g_mq2, g_mq135;
 
-static const char* GATEWAY_URL = "http://172.20.10.3/sensor";
+static const char* GATEWAY_URL = "http://172.20.10.4/sensor";
 
 void setup() {
     Serial.begin(115200);
@@ -18,7 +18,6 @@ void setup() {
 
 void loop() {
     sensorNode_readAll();
-    delay(2000);
 
     http_sendSensorData(
         GATEWAY_URL,
