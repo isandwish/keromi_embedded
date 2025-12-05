@@ -8,8 +8,6 @@ import AirQualityBox from "@/components/airQualityBox";
 import SoundBox from "@/components/soundBox";
 import FocusBox from "@/components/focusBox";
 import TimerBox from "@/components/timerBox";
-import AirMQ2Box from "@/components/airMQ2Box";
-import AirMQ135Box from "@/components/airMQ135Box";
 import { useEffect, useState } from "react";
 import getData from "@/libs/getData";
 import { SensorData } from "@/interfaces";
@@ -63,13 +61,16 @@ export default function Home() {
         }}
       >
         {/* ✳️row 1: timer⏱️ */}
-        <TimerBox />
-        <TextField
+        <TimerBox pir={data?.pir ?? null}/>
+
+        {/* Test PIR */}
+        {/* <TextField
         label={data?.pir ?? null}    // แสดง label ด้านบน
         placeholder="Type here..." // placeholder
         size="small"             // ทำให้ TextBox เล็ก
         variant="outlined"       // หรือ filled / standard
-        />
+        /> */}
+        
         {/* ✳️row 2: focus*/}
         <FocusBox />
 
