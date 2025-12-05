@@ -5,22 +5,10 @@ import getData from "@/libs/getData";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { SoundBoxProps } from "@/interfaces";
 
-export default function SoundBox() {
-    const [sound, setSound] = useState<number | null>(null);
-    
-        useEffect(() => {
-            async function load() {
-            const result: Record<string, SensorData> = await getData();
-            const values = Object.values(result);
-            if (values.length > 0) {
-                const latest = values[values.length - 1]; // latest is SensorData
-                setSound(latest.sound);
-            }
-            }
-            load();
-        }, []);
-        
+export default function SoundBox({level,value}:SoundBoxProps) {
+
     return (
                 <Box
                     sx={{
@@ -84,7 +72,7 @@ export default function SoundBox() {
                                 fontSize: "22px",
                                 fontWeight: "bold",
                             }}>
-                                {sound !== null ? `${sound} dB` : "..."} {/* แสดง sound จาก backend */}
+                                {value !== null ? `${value} dB` : "..."} {/* แสดง sound จาก backend */}
                             </Typography>
         
                             <Typography
@@ -93,7 +81,7 @@ export default function SoundBox() {
                                 fontSize: "16.79px",
                                 fontWeight: "bold",
                             }}>
-                                Perfect!!
+                                {level !== null ? `${level}` : "..."}
                             </Typography>
                         </Box>
                     </Box>
