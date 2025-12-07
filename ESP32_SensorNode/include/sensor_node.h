@@ -13,6 +13,5 @@ struct SensorPacket {
 };
 
 void sensor_node_init();
-SensorPacket sensor_node_read();
 
 #endif

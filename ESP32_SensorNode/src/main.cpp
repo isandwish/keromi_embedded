@@ -36,9 +36,9 @@ void loop() {
     json += "\"mq2\":" + String(mq2v) + ",";
     json += "\"mq135\":" + String(mq135v);
     json += "}";
+    Serial.println(json);
     
     mqtt_publish("studybuddy/sensor1/data", json.c_str());
-    sensor_node_read();
 
     delay(1000);
 }
