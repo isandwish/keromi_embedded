@@ -33,3 +33,15 @@ export const getLatestFormattedSensor = async (req, res) => {
     res.status(500).json({ error: "Failed to format latest" });
   }
 };
+
+import { predictScore } from "../services/aiScore.service.js";
+
+export const getEnvironmentScore = (req, res) => {
+  try {
+    const score = predictScore(req.body);
+    res.json({ score });
+  } catch (e) {
+    console.error("PREDICT ERROR:", e);
+    res.status(500).json({ error: e.message });
+  }
+};
