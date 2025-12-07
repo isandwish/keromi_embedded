@@ -14,15 +14,11 @@ void decision_logic_init() {
     Serial.println("[Decision] logic ready.");
 }
 
-void decision_logic_loop() {
-    if (millis() - lastCheck < 1000) return;
-    lastCheck = millis();
-
-    NodeSensor n1 = sensor_gateway_get_node1();
-    GatewayLocal g = sensor_gateway_read_local();
+void decision_print_snapshot(const NodeSensor& n1, const GatewayLocal& g) {
 
     Serial.println("=== Decision Logic Snapshot ===");
 
+    // SensorNode Data
     if (n1.valid) {
         Serial.printf("Temp   : %.2f\n", n1.temp);
         Serial.printf("Hum    : %.2f\n", n1.hum);
@@ -33,10 +29,21 @@ void decision_logic_loop() {
         Serial.println("SensorNode: no data yet.");
     }
 
+    // Gateway Local Sensor Data
     Serial.printf("RMS    : %.6f\n", g.sound_rms);
     Serial.printf("AvgAbs : %.6f\n", g.sound_avgAbs);
     Serial.printf("Peak   : %.6f\n", g.sound_peak);
     Serial.printf("PIR    : %s\n", gatewayPir.c_str());
+}
+
+void decision_logic_loop() {
+    if (millis() - lastCheck < 1000) return;
+    lastCheck = millis();
+
+    NodeSensor n1 = sensor_gateway_get_node1();
+    GatewayLocal g = sensor_gateway_read_local();
+
+    decision_print_snapshot(n1, g);
 
     // Example decision
     if (n1.valid && n1.mq135 > 900) {

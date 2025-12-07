@@ -136,5 +136,5 @@ void loop() {
     // ---- Local Decision Logic ----
     decision_logic_loop();
 
-    delay(1000);
+    delay(2000);
 }
