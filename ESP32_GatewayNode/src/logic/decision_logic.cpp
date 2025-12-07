@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "decision_logic.h"
 #include "sensor_gateway.h"
+#include "actuators/actuator.h"
 
 // จาก main.cpp
 extern float gatewayRms;
@@ -46,11 +47,16 @@ void decision_logic_loop() {
     decision_print_snapshot(n1, g);
 
     // Example decision
-    if (n1.valid && n1.mq135 > 900) {
+    if (n1.valid && n1.mq135 > 1200) {
         Serial.println("⚠ High gas detected!");
     }
 
     if (g.sound_peak > 0.2) {
         Serial.println("⚠ High sound peak detected!");
     }
+
+    if (n1.valid) {
+        actuator_setTemperature(n1.temp);
+    }
 }
+
