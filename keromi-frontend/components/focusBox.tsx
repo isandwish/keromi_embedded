@@ -1,9 +1,10 @@
 "use client";
 
+import { EnvScoreBoxProps } from "@/interfaces";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
-export default function FocusBox() {
+export default function FocusBox({envScore}:EnvScoreBoxProps) {
     return (
         <Box
           sx={{
@@ -45,7 +46,7 @@ export default function FocusBox() {
             </Box>
 
             {/* 💟detail: text */}
-            <Typography
+            {/* <Typography
               sx={{
                 fontWeight: "bold",
                 color: "#EEEEEE",
@@ -54,7 +55,7 @@ export default function FocusBox() {
               }}
             >
               Perfect!!
-            </Typography>
+            </Typography> */}
           </Box>
             
           {/* 💟coloumn RIGHT: header + % */}
@@ -90,11 +91,11 @@ export default function FocusBox() {
               sx={{
                 fontWeight: "bold",
                 color: "#EEEEEE",
-                fontSize: "73.52px",
+                fontSize: "64px",
                 // mt: "-2px"
               }}
             >
-              90%
+              {Number(envScore).toFixed(2)}
             </Typography>
           </Box>
         </Box>

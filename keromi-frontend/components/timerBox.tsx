@@ -78,27 +78,41 @@ export default function TimerBox({ pir } : PIRProps) {
         return () => clearInterval(intervalRef.current!);
     }, [isRunning, mode, isOnBreak, focusTime, breakTime]);
 
-    // ------------------------------------
-    // 💡 NEW: จัดการสถานะตามค่า pir (การตรวจจับบุคคล)
-    // ------------------------------------
-    useEffect(() => {
-        // โค้ดนี้จะทำงานเมื่อ pir มีการเปลี่ยนแปลง
-        if (mode !== "pomodoro" && mode !== "stopwatch") return; // ทำงานเฉพาะโหมดจับเวลา
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-        // pir = 'absent' หมายถึงผู้ใช้งานไม่อยู่
-        if (pir === "absent") {
-            // เงื่อนไข: ถ้าเวลากำลังวิ่งอยู่ (isRunning = true) และมีการเริ่มจับเวลาไปแล้ว (isTimeSet = true)
+    useEffect(() => {
+        // ทำงานเฉพาะโหมดจับเวลา
+        if (mode !== "pomodoro" && mode !== "stopwatch") return;
+
+        // ถ้า pir = "absent"
+        if (pir === "critical_absent") {
+            // เงื่อนไข: เวลากำลังวิ่ง + เคยเริ่มจับเวลา
             if (isRunning && isTimeSet) {
-                // 1. หยุดเวลา
-                // eslint-disable-next-line react-hooks/set-state-in-effect
-                setIsRunning(false);
-                
-                // 2. เปิด AwakePopup
-                setOpenAwakePopup(true);
+
+                // เคลียร์ timeout เดิมก่อน
+                if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+                // ตั้งดีเลย์ 3 วินาที
+                timeoutRef.current = setTimeout(() => {
+                    // เช็คอีกครั้งว่าตอนครบ 3 วิ ยัง absent อยู่ไหม
+                    if (pir === "critical_absent") {
+                        setIsRunning(false);
+                        setOpenAwakePopup(true);
+                    }
+                }, 3000);
             }
-        } 
-        // Note: ถ้า pir เป็น 'present' และ AwakePopup เปิดอยู่, 
-        // ผู้ใช้จะต้องกด 'Close' ใน AwakePopup เพื่อให้เวลาเริ่มเดินต่อ (ดู handleAwakePopupClose)
+        } else {
+            // ถ้า pir = 'present' ระหว่างดีเลย์ → ยกเลิก popup ทันที
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+                timeoutRef.current = null;
+            }
+        }
+
+        return () => {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+
     }, [pir, isRunning, isTimeSet, mode]);
 
 
@@ -162,6 +176,11 @@ export default function TimerBox({ pir } : PIRProps) {
         if (isTimeSet) {
             setIsRunning(true);
         }
+        // setTimeout(() => {
+        //     if (isTimeSet) {
+        //     setIsRunning(true);
+        //     }
+        // }, 5000);
     };
 
     // ------------------------------
