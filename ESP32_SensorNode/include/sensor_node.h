@@ -1,8 +1,17 @@
 #ifndef SENSOR_NODE_H
 #define SENSOR_NODE_H
 
-void sensorNode_init();
-void sensorNode_readAll();
-void sensorNode_sendAll();
+struct SensorPacket {
+    float temperature;
+    float humidity;
+    float mq2;
+    float mq135;
+    float light;
+    float sound_rms;
+    float sound_peak;
+    const char* pir;
+};
+
+void sensor_node_init();
 
 #endif

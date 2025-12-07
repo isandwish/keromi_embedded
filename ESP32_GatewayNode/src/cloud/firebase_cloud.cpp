@@ -6,6 +6,7 @@
 #include "utils/time_utils.h"
 
 void firebase_init() {
+    time_utils_init();
     Serial.println("Firebase initialized.");
 }
 
@@ -44,6 +45,7 @@ void firebase_send(
     HTTPClient http;
 
     String key = get_compact_timestamp();
+    // Serial.println(key);
 
     // Firebase URL
     String url = String(FIREBASE_URL) + "/sensor/" + key + ".json?auth=" + FIREBASE_SECRET;
@@ -71,7 +73,7 @@ void firebase_send(
 
     int code = http.PUT(json);
 
-    Serial.print("Firebase POST Response: ");
+    Serial.print("Firebase PUT Response: ");
     Serial.println(code);
 
     http.end();

@@ -3,8 +3,8 @@
 
 void inmp441_init(int bclk, int ws, int sd);
 
-float mic_rms();
-float mic_avgAbs();
-float mic_peak();
+float inmp441_getRMS();
+float inmp441_getPeak();
+float inmp441_getAvgAbs();
 
 #endif
