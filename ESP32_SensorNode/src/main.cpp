@@ -1,28 +1,44 @@
 #include <Arduino.h>
-
-#include "sensor_node.h"
+#include "config.h"
 #include "network/wifi_manager.h"
-#include "network/http_client.h"
-
-extern float g_temp, g_hum;
-extern int g_light, g_mq2, g_mq135;
-
-static const char* GATEWAY_URL = "http://172.20.10.4/sensor";
+#include "network/mqtt_client.h"
+#include "sensors/ky015.h"
+#include "sensors/ky018.h"
+#include "sensors/mq2.h"
+#include "sensors/mq135.h"
+#include "sensor_node.h"
 
 void setup() {
     Serial.begin(115200);
-
     wifi_init();
-    sensorNode_init();
+
+    ky015_init(4);
+    ky018_init(34);
+    mq2_init(35);
+    mq135_init(33);
+
+    mqtt_init(MQTT_CLIENT_ID, MQTT_HOST, MQTT_PORT, MQTT_USER, MQTT_PASS);
 }
 
 void loop() {
-    sensorNode_readAll();
+    mqtt_loop();
+    
+    float t = ky015_readTemperature();
+    float h = ky015_readHumidity();
+    int light = ky018_readLight();
+    int mq2v = mq2_read();
+    int mq135v = mq135_read();
+    
+    String json = "{";
+    json += "\"temp\":" + String(t) + ",";
+    json += "\"hum\":" + String(h) + ",";
+    json += "\"light\":" + String(light) + ",";
+    json += "\"mq2\":" + String(mq2v) + ",";
+    json += "\"mq135\":" + String(mq135v);
+    json += "}";
+    
+    mqtt_publish("studybuddy/sensor1/data", json.c_str());
+    sensor_node_read();
 
-    http_sendSensorData(
-        GATEWAY_URL,
-        g_temp, g_hum, g_light, g_mq2, g_mq135
-    );
-
-    delay(2000);
+    delay(1000);
 }

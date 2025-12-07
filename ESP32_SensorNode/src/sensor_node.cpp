@@ -1,83 +1,55 @@
 #include <Arduino.h>
-#include <HTTPClient.h>
-
 #include "sensor_node.h"
 #include "config.h"
 
+// WiFi
+#include "network/wifi_manager.h"
+
+// Sensors
 #include "sensors/ky015.h"
 #include "sensors/ky018.h"
 #include "sensors/mq2.h"
 #include "sensors/mq135.h"
-#include "network/wifi_manager.h"
 
-// Global values
-float g_temp = 0;
-float g_hum = 0;
-int g_light = 0;
-int g_mq2 = 0;
-int g_mq135 = 0;
+// Global data
+static SensorPacket g_data;
 
-void sensorNode_init() {
-    Serial.println("Initializing sensors...");
+void sensor_node_init() {
+    Serial.println("Initializing Sensor Node...");
 
     // WiFi
     wifi_init();
 
     // Sensors
-    ky015_init(4);
-    ky018_init(34);
-    mq2_init(35);
-    mq135_init(33);
+    ky015_init(4);   // DHT11/22 on pin 4
+    ky018_init(34);  // LDR on pin 34
+    mq2_init(35);    // MQ2 on pin 35
+    mq135_init(33);  // MQ135 on pin 33
 
-    Serial.println("Sensor node ready");
+    Serial.println("Sensor Node ready.");
 }
 
-void sensorNode_readAll() {
-    g_temp  = ky015_readTemperature();
-    g_hum   = ky015_readHumidity();
-    g_light = ky018_readLight();
-    g_mq2   = mq2_read();
-    g_mq135 = mq135_read();
+SensorPacket sensor_node_read() {
 
-    Serial.println("------ Sensor Data ------");
-    Serial.printf("Temp: %.2f °C\n", g_temp);
-    Serial.printf("Hum : %.2f %%RH\n", g_hum);
-    Serial.printf("Light: %d\n", g_light);
-    Serial.printf("Gas MQ2: %d\n", g_mq2);
-    Serial.printf("Air MQ135: %d\n", g_mq135);
-    Serial.println("-------------------------\n");
-}
+    g_data.temperature = ky015_readTemperature();
+    g_data.humidity    = ky015_readHumidity();
+    g_data.light       = ky018_readLight();
+    g_data.mq2         = mq2_read();
+    g_data.mq135       = mq135_read();
 
-void sensorNode_sendAll(String gatewayUrl) {
-    if (WiFi.status() != WL_CONNECTED) {
-        Serial.println("WiFi disconnected, skipping send.");
-        return;
-    }
+    // Sound + PIR not implemented yet
+    g_data.sound_rms  = 0.0;
+    g_data.sound_peak = 0.0;
+    g_data.pir        = "idle";
 
-    HTTPClient http;
-    http.begin(gatewayUrl);
-    http.addHeader("Content-Type", "application/json");
+    // Debug print
+    Serial.println("------ Sensor Readings ------");
+    Serial.printf("Temperature: %.2f°C\n", g_data.temperature);
+    Serial.printf("Humidity   : %.2f%%\n", g_data.humidity);
+    Serial.printf("Light      : %d\n",     g_data.light);
+    Serial.printf("MQ2        : %d\n",     g_data.mq2);
+    Serial.printf("MQ135      : %d\n",     g_data.mq135);
+    Serial.println("------------------------------\n");
 
-    // build JSON
-    String json = "{";
-    json += "\"temp\":" + String(g_temp) + ",";
-    json += "\"hum\":"  + String(g_hum) + ",";
-    json += "\"light\":" + String(g_light) + ",";
-    json += "\"mq2\":" + String(g_mq2) + ",";
-    json += "\"mq135\":" + String(g_mq135);
-    json += "}";
-
-    Serial.println("Sending to gateway: " + json);
-
-    int httpCode = http.POST(json);
-
-    if (httpCode > 0) {
-        Serial.printf("Gateway [%d]: %s\n",
-                      httpCode, http.getString().c_str());
-    } else {
-        Serial.printf("Send failed: %s\n",
-                      http.errorToString(httpCode).c_str());
-    }
-
-    http.end();
+    return g_data;
 }

@@ -1,7 +1,7 @@
-#ifndef GATEWAY_NODE_H
-#define GATEWAY_NODE_H
+#pragma once
+#include "sensor_gateway.h"
 
-void gateway_init();
-void gateway_loop();
+void gateway_node_init();
 
-#endif
+NodeSensor gateway_get_node_sensor();
+GatewayLocal gateway_get_local_sensor();

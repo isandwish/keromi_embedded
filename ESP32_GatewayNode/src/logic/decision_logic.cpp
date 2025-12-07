@@ -1,32 +1,49 @@
 #include <Arduino.h>
 #include "decision_logic.h"
-#include "network/sensor_data.h"
+#include "sensor_gateway.h"
 
-unsigned long lastCheck = 0;
+// จาก main.cpp
+extern float gatewayRms;
+extern float gatewayPeak;
+extern float gatewayAvgAbs;
+extern String gatewayPir;
+
+static unsigned long lastCheck = 0;
 
 void decision_logic_init() {
-    Serial.println("Decision logic ready.");
+    Serial.println("[Decision] logic ready.");
 }
 
 void decision_logic_loop() {
-
     if (millis() - lastCheck < 1000) return;
     lastCheck = millis();
 
-    Serial.println("=== Sensor Data ===");
-    Serial.printf("Temp   : %.2f\n", lastTemp);
-    Serial.printf("Hum    : %.2f\n", lastHum);
-    Serial.printf("MQ-2   : %.2f\n", lastMQ2);
-    Serial.printf("MQ-135 : %.2f\n", lastMQ135);
-    Serial.printf("Light  : %.2f\n", lastLight);
+    NodeSensor n1 = sensor_gateway_get_node1();
+    GatewayLocal g = sensor_gateway_read_local();
 
-    Serial.printf("RMS    : %.6f\n", lastRms);
-    Serial.printf("AvgAbs : %.6f\n", lastAvgAbs);
-    Serial.printf("Peak   : %.6f\n", lastPeak);
-    Serial.printf("PIR    : %s\n", lastPir.c_str());
+    Serial.println("=== Decision Logic Snapshot ===");
 
-    // ----------- Example logic -----------
-    if (lastMQ135 > 900) {
+    if (n1.valid) {
+        Serial.printf("Temp   : %.2f\n", n1.temp);
+        Serial.printf("Hum    : %.2f\n", n1.hum);
+        Serial.printf("Light  : %d\n",   n1.light);
+        Serial.printf("MQ-2   : %d\n",   n1.mq2);
+        Serial.printf("MQ-135 : %d\n",   n1.mq135);
+    } else {
+        Serial.println("SensorNode: no data yet.");
+    }
+
+    Serial.printf("RMS    : %.6f\n", g.sound_rms);
+    Serial.printf("AvgAbs : %.6f\n", g.sound_avgAbs);
+    Serial.printf("Peak   : %.6f\n", g.sound_peak);
+    Serial.printf("PIR    : %s\n", gatewayPir.c_str());
+
+    // Example decision
+    if (n1.valid && n1.mq135 > 900) {
         Serial.println("⚠ High gas detected!");
+    }
+
+    if (g.sound_peak > 0.2) {
+        Serial.println("⚠ High sound peak detected!");
     }
 }
