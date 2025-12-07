@@ -40,5 +40,5 @@ void loop() {
     
     mqtt_publish("studybuddy/sensor1/data", json.c_str());
 
-    delay(1000);
+    delay(2000);
 }
