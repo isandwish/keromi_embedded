@@ -70,20 +70,20 @@ export default function TemperatureBox({ temp }: TemperatureBoxProps) {
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "28px",
+                        fontSize: "24px",
                         fontWeight: "bold",
                     }}>
                         {temp !== null ? `${temp} ํC` : "..."} {/* แสดง temp จาก backend */}
                     </Typography>
 
-                    <Typography
+                    {/* <Typography
                     sx={{
                         color: "#8260A2",
                         fontSize: "16.79px",
                         fontWeight: "bold",
                     }}>
                         Perfect!!
-                    </Typography>
+                    </Typography> */}
                 </Box>
             </Box>
         </Box>

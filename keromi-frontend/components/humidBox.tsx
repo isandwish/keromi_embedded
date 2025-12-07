@@ -70,20 +70,20 @@ export default function HumidityBox({ humid }: HumidBoxProps) {
                             <Typography
                             sx={{
                                 color: "#8260A2",
-                                fontSize: "20px",
+                                fontSize: "24px",
                                 fontWeight: "bold",
                             }}>
-                                {humid !== null ? `${humid}%RH` : "..."} {/* แสดง hum จาก backend */}
+                                {humid !== null ? `${humid}` : "..."} {/* แสดง hum จาก backend */}
                             </Typography>
         
-                            <Typography
+                            {/* <Typography
                             sx={{
                                 color: "#8260A2",
                                 fontSize: "16.79px",
                                 fontWeight: "bold",
                             }}>
                                 Perfect!!
-                            </Typography>
+                            </Typography> */}
                         </Box>
                     </Box>
                 </Box>

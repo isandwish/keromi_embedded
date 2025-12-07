@@ -67,20 +67,20 @@ export default function AirQualityBox({level,value}:GasBoxProps) {
                     <Typography
                     sx={{
                         color: "#8260A2",
-                        fontSize: "30px",
+                        fontSize: "24px",
                         fontWeight: "bold",
                     }}>
                         {value}
                     </Typography>
 
-                    <Typography
+                    {/* <Typography
                     sx={{
                         color: "#8260A2",
                         fontSize: "16.79px",
                         fontWeight: "bold",
                     }}>
                         {level}
-                    </Typography>
+                    </Typography> */}
                 </Box>
             </Box>
         </Box>

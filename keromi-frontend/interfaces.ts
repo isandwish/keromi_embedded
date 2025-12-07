@@ -13,8 +13,13 @@ export interface SensorData {
     level: string;
     value: number;
   };
+  envScore: number;
   pir: string;
   timestamp: string; // ISO timestamp
+}
+
+export interface EnvScoreBoxProps {
+  envScore: number | null;
 }
 
 export interface GasBoxProps {

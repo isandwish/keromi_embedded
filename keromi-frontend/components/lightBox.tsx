@@ -69,20 +69,20 @@ export default function LightBox({ light }: LightBoxProps) {
                         <Typography
                         sx={{
                             color: "#8260A2",
-                            fontSize: "22px",
+                            fontSize: "24px",
                             fontWeight: "bold",
                         }}>
                             {light !== null ? `${light}` : "..."} {/* แสดง light จาก backend */}
                         </Typography>
     
-                        <Typography
+                        {/* <Typography
                         sx={{
                             color: "#8260A2",
                             fontSize: "16.79px",
                             fontWeight: "bold",
                         }}>
                             Perfect!!
-                        </Typography>
+                        </Typography> */}
                     </Box>
                 </Box>
             </Box>

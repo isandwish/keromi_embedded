@@ -16,12 +16,13 @@ export default function Home() {
   const [data, setData] = useState<SensorData | null>(null);
 
     useEffect(() => {
-      async function load() {
-        const result: SensorData = await getData(); // เปลี่ยน type เป็น SensorData
+      const interval = setInterval(async () => {
+        const result: SensorData = await getData();
         console.log("Received data:", result);
-        setData(result); // setState ตรง ๆ
-      }
-      load();
+        setData(result);
+      }, 2000); // 2 วินาที
+
+      return () => clearInterval(interval); // cleanup
     }, []);
 
       if (data != null) {
@@ -72,7 +73,7 @@ export default function Home() {
         /> */}
         
         {/* ✳️row 2: focus*/}
-        <FocusBox />
+        <FocusBox envScore={data?.envScore ?? null} />
 
         {/* ✳️row 3: temp❄️ + light💡 */}
         <Box

@@ -69,20 +69,20 @@ export default function SoundBox({level,value}:SoundBoxProps) {
                             <Typography
                             sx={{
                                 color: "#8260A2",
-                                fontSize: "22px",
+                                fontSize: "24px",
                                 fontWeight: "bold",
                             }}>
-                                {value !== null ? `${value} dB` : "..."} {/* แสดง sound จาก backend */}
+                                {value !== null ? `${value}` : "..."} {/* แสดง sound จาก backend */}
                             </Typography>
         
-                            <Typography
+                            {/* <Typography
                             sx={{
                                 color: "#8260A2",
                                 fontSize: "16.79px",
                                 fontWeight: "bold",
                             }}>
                                 {level !== null ? `${level}` : "..."}
-                            </Typography>
+                            </Typography> */}
                         </Box>
                     </Box>
                 </Box>
