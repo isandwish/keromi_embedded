@@ -47,7 +47,7 @@ void decision_logic_loop() {
     decision_print_snapshot(n1, g);
 
     // Example decision
-    if (n1.valid && n1.mq135 > 1200) {
+    if (n1.valid && n1.mq135 > 3100) {
         Serial.println("⚠ High gas detected!");
     }
 
