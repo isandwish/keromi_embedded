@@ -133,6 +133,18 @@ void loop() {
         gatewayPir
     );
 
+    blynk_send(
+        n1.temp,
+        n1.hum,
+        n1.mq2,
+        n1.mq135,
+        n1.light,
+        g.sound_rms,
+        g.sound_avgAbs,
+        g.sound_peak,
+        gatewayPir
+    );
+
     // ---- Local Decision Logic ----
     decision_logic_loop();
 
